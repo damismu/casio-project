@@ -4,16 +4,19 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: lephenixnoir/gint:3-2.1.0
+    container: lephenixnoir/gint:latest
     steps:
       - name: Checkout del codigo
         uses: actions/checkout@v4
 
-      - name: Compilar proyecto
+      - name: Compilar G3A
         run: |
+          # Usamos el compilador de Casio directamente
+          sh-elf-gcc -c main.c -o main.o -m4-nofpu -O2 -I /opt/toolchain/sh-elf/include -I /usr/local/include
+          # Generamos el archivo para el menu de la calculadora
           gint-build --target fxcg50 main.c -o aichat.g3a
 
-      - name: Guardar resultado
+      - name: Subir Resultado
         uses: actions/upload-artifact@v4
         with:
           name: App-Casio-Damian
