@@ -4,7 +4,7 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: lephenixnoir/gint:latest
+    container: lephenixnoir/gint:3-2.1.0
     steps:
       - name: Checkout del codigo
         uses: actions/checkout@v4
@@ -18,4 +18,3 @@ jobs:
         with:
           name: App-Casio-Damian
           path: aichat.g3a
-          
