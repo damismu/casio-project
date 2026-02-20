@@ -1,0 +1,21 @@
+name: Compilar App Casio
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: lephenixnoir/gint:latest
+    steps:
+      - name: Checkout del codigo
+        uses: actions/checkout@v4
+
+      - name: Compilar proyecto
+        run: |
+          gint-build --target fxcg50 main.c -o aichat.g3a
+
+      - name: Guardar resultado
+        uses: actions/upload-artifact@v4
+        with:
+          name: App-Casio-Damian
+          path: aichat.g3a
+          
